@@ -1,0 +1,16 @@
+@import model.Transaction
+@(transactions : Set[Transaction])
+
+<html>
+<head>
+  <title>History</title>
+</head>
+    <body>
+      @for(transaction <- transactions){
+        <a href="#">@transaction.getTransactionId()</a>
+        <p>Amount : @transaction.getAmount()</p>
+        <p>Date :@transaction.getDate()</p>
+        <p>Operation :@transaction.getOperation()</p>
+      }
+    </body>
+</html>

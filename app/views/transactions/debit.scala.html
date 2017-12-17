@@ -1,0 +1,17 @@
+@import model.Transaction
+@(debitForm : Form[Transaction])
+
+<html>
+    <head>
+        <title>Debit</title>
+    </head>
+    <body>
+        @helper.form(action = routes.TransactionController.debitPost()){
+            @helper.CSRF.formField
+            @helper.inputText(debitForm("externalAccount"))
+            @helper.inputText(debitForm("amount"))
+            <input type="submit" value="submit"/>
+        }
+
+    </body>
+</html>

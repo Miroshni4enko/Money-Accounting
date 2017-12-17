@@ -10,3 +10,10 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /assslavik        controllers.AssslavikController.assslavikGet
 POST    /assslavik        controllers.AssslavikController.assslavikPost
+
+GET     /transaction/history            controllers.TransactionController.history
+GET     /transaction/:transactionId     controllers.TransactionController.showTransactionDetails(transactionId : Integer)
+GET     /credit                         controllers.TransactionController.creditGet
+POST    /credit                         controllers.TransactionController.creditPost
+GET     /debit                          controllers.TransactionController.debitGet
+POST    /debit                          controllers.TransactionController.debitPost
