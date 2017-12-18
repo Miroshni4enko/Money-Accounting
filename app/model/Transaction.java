@@ -3,70 +3,25 @@ package model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import com.avaje.ebean.Model;
+import javax.persistence.*;
+import play.data.format.*;
+import play.data.validation.*;
 
-public class Transaction {
-    private Integer transactionId;
-    private Integer externalAccount;
-    private Operation operation;
-    private Integer amount;
-    private Date date;
+public class Transaction extends Model{
+    @Id
+    public Long transactionId;
+    public Integer externalAccount;
+    @Constraints.Required
+    public Operation operation;
+    @Constraints.Required
+    public Integer amount;
+    @Formats.DateTime(pattern = "dd/MM/yyyy HH:mm:ss")
+    public Date date;
 
-    public Integer getTransactionId() {
-        return transactionId;
-    }
+    public static final Finder<Long, Transaction> find = new Finder<>(Transaction.class);
 
-    public Integer getExternalAccount() {
-        return externalAccount;
-    }
-
-    public Operation getOperation() {
-        return operation;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setTransactionId(Integer transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public void setExternalAccount(Integer externalAccount) {
-        this.externalAccount = externalAccount;
-    }
-
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public static void setTransactions(Set<Transaction> transactions) {
-        Transaction.transactions = transactions;
-    }
-
-    public Transaction() {
-    }
-
-    public Transaction(int transactionId, int externalAccount, Operation operation, int amount, Date date) {
-        this.transactionId = transactionId;
-        this.externalAccount = externalAccount;
-        this.operation = operation;
-        this.amount = amount;
-        this.date = date;
-    }
-
-    private static Set<Transaction> transactions;
+    /*private static Set<Transaction> transactions;
 
     static {
         transactions = new HashSet<>();
@@ -98,5 +53,5 @@ public class Transaction {
         transaction.operation = Operation.Debit;
         transactions.add(transaction);
     }
-
+*/
 }

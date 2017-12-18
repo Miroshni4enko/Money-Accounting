@@ -1,16 +1,21 @@
 package model;
 
-public class Account {
-    public Integer accountId;
+import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
+
+import javax.persistence.*;
+import javax.validation.Constraint;
+
+public class Account extends Model {
+    @Id
+    public Long accountId;
+    @Constraints.Required
     public String name;
+    @Constraints.Required
     public String address;
+    @Constraints.Required
     public Integer phone;
 
-    public Account(Integer accountId, String name, String address, Integer phone) {
-        this.accountId = accountId;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-    }
+    public static final Finder<Long, Account> find = new Finder<>(Account.class);
 
 }
