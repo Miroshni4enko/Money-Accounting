@@ -1,10 +1,9 @@
-package model;
+package models;
 
 import io.ebean.*;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
-import javax.validation.Constraint;
 import java.util.ArrayList;
 import java.util.List;
 

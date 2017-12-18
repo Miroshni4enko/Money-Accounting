@@ -1,0 +1,35 @@
+
+@(operationForm : Form[Transaction])(customerAccounts : List[CustomerAccount])(formAction : play.api.mvc.Call)(title : String)
+
+<html>
+    <head>
+        <title>@title</title>
+    </head>
+    <body>
+        <h1>@title</h1>
+        @for(key <- Array("danger","info","success","warning")){
+            @if(flash.containsKey(key)){
+                <div class="alert alert-@key">
+                    @flash.get(key)
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="glyphicon glyphicon-remove"></i></a>
+                </div>
+            }
+        }
+        @helper.form(formAction){
+            @helper.CSRF.formField
+            @helper.select(
+                field = operationForm("customerAccount"),
+                options = customerAccounts.map(customerAccount => customerAccount.accountNumber.toString -> customerAccount.accountNumber.toString.concat(" balance:").concat(customerAccount.balance.toString)),
+                '_label -> "Choose Account:"
+            )
+            @helper.inputText(operationForm("externalAccountNumber"), '_label -> "External Account")
+
+            @helper.inputText(operationForm("description"), '_label -> "Operation description")
+
+            @helper.inputText(operationForm("amount"), '_label -> "Amount", '_showConstraints -> false)
+
+            <input type="submit" value="submit"/>
+        }
+
+    </body>
+</html>

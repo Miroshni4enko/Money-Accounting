@@ -1,8 +1,7 @@
-package model;
+package models;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 import io.ebean.*;
 import javax.persistence.*;
 import play.data.format.*;
@@ -13,8 +12,8 @@ import play.db.ebean.Transactional;
 public class Transaction extends Model{
     @Id
     public Long transactionId;
-    @Constraints.Required
-    /*@Constraints.MaxLength(16)
+    /*@Constraints.Required
+    @Constraints.MaxLength(16)
     @Constraints.Min(1000000000000000)*/
     public Long externalAccountNumber;
     public Operation operation;
@@ -32,7 +31,7 @@ public class Transaction extends Model{
 
 
     @Transactional
-    public static void credit(Transaction transaction){
+    public static void credit(Transaction transaction) throws IllegalArgumentException{
         transaction.operation = Operation.Credit;
         if (transaction.customerAccount.balance < transaction.amount){
             throw new IllegalArgumentException();

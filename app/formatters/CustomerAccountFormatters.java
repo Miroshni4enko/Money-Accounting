@@ -1,17 +1,12 @@
 package formatters;
 
-import model.CustomerAccount;
+import models.CustomerAccount;
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-
-import java.time.LocalTime;
 
 import play.data.format.Formatters;
 import play.data.format.Formatters.SimpleFormatter;
