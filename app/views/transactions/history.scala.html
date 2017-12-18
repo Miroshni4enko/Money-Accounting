@@ -1,5 +1,5 @@
 @import model.Transaction
-@(transactions : Set[Transaction])
+@(transactions : List[Transaction])
 
 <html>
 <head>
@@ -7,10 +7,12 @@
 </head>
     <body>
       @for(transaction <- transactions){
-        <a href="#">@transaction.getTransactionId()</a>
-        <p>Amount : @transaction.getAmount()</p>
-        <p>Date :@transaction.getDate()</p>
-        <p>Operation :@transaction.getOperation()</p>
+        <a href="#">@transaction.transactionId</a>
+          <p>Operation : @transaction.operation</p>
+          <p>Description : @transaction.description</p>
+          <p>Account : @transaction.customerAccount.accountNumber</p>
+          <p>Amount : @transaction.amount</p>
+          <p>Date : @transaction.date</p>
       }
     </body>
 </html>
