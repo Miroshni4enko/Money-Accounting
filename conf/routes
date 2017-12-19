@@ -11,9 +11,20 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /assslavik        controllers.AssslavikController.assslavikGet
 POST    /assslavik        controllers.AssslavikController.assslavikPost
 
-GET     /transaction/history            controllers.TransactionController.history
-GET     /transaction/:transactionId     controllers.TransactionController.showTransactionDetails(transactionId : Integer)
-GET     /credit                         controllers.TransactionController.creditGet
-POST    /credit                         controllers.TransactionController.creditPost
-GET     /debit                          controllers.TransactionController.debitGet
-POST    /debit                          controllers.TransactionController.debitPost
+GET     /transactions                               controllers.TransactionsController.history
+GET     /transaction/:customerAccountId             controllers.TransactionsController.showByCustomerAccountId(customerAccountId : Long)
+POST    /transaction/credit                         controllers.TransactionsController.credit
+POST    /transaction/debit                          controllers.TransactionsController.debit
+DELETE  /transaction/delete/:transactionId          controllers.CustomersController.delete(transactionId : Long)
+
+GET     /accounts                                   controllers.AccountsController.list
+GET     /account/:customerAccountId                 controllers.AccountsController.show(customerAccountId : Long)
+POST    /account/create                             controllers.AccountsController.create
+PUT     /account/update                             controllers.AccountsController.update
+DELETE  /account/delete/:customerAccountId          controllers.CustomersController.delete(customerAccountId : Long)
+
+GET     /customers                                  controllers.CustomersController.list
+GET     /customer/:customerId                       controllers.CustomersController.show(customerId : Long)
+POST    /customer/create                            controllers.CustomersController.create
+PUT     /customer/update                            controllers.CustomersController.update
+DELETE  /customer/delete/:customerId                controllers.CustomersController.delete(customerId : Long)

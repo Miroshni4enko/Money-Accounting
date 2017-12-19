@@ -8,8 +8,7 @@ public class FormattersModule extends AbstractModule {
 
     @Override
     protected void configure() {
-
         bind(Formatters.class).toProvider(CustomerAccountFormatters.class);
-
     }
+
 }
