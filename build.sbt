@@ -1,3 +1,5 @@
+import play.sbt.PlayImport.PlayKeys.playRunHooks
+
 name := """Money Accounting"""
 organization := "com.vimi"
 
@@ -7,4 +9,16 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
 scalaVersion := "2.12.2"
 
-libraryDependencies += guice
+libraryDependencies ++= Seq (
+  guice,
+  jdbc,
+  ws
+  )
+
+playRunHooks ++= Seq(
+  Webpack
+)
+
+routesGenerator := InjectedRoutesGenerator
+
+resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"

@@ -11,9 +11,11 @@ import javax.inject.Singleton;
 import play.data.format.Formatters;
 import play.data.format.Formatters.SimpleFormatter;
 import play.i18n.MessagesApi;
+
 /**
 *This class format info of the CustomerAccount for correct display on the form
 */
+
 @Singleton
 public class CustomerAccountFormatters implements Provider<Formatters> {
 
