@@ -9,16 +9,23 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
 scalaVersion := "2.12.2"
 
-libraryDependencies ++= Seq (
-  guice,
-  jdbc,
-  ws
-  )
+libraryDependencies += guice
 
-playRunHooks ++= Seq(
-  Webpack
-)
+mainClass in assembly := Some("play.core.server.ProdServerStart")
+fullClasspath in assembly += Attributed.blank(PlayKeys.playPackageAssets.value)
 
-routesGenerator := InjectedRoutesGenerator
-
-resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+assemblyMergeStrategy in assembly := {
+  case manifest if manifest.contains("MANIFEST.MF") =>
+    // We don't need manifest files since sbt-assembly will create
+    // one with the given settings
+    MergeStrategy.discard
+  case "application.conf"                            => MergeStrategy.concat
+  
+  case referenceOverrides if referenceOverrides.contains("reference-overrides.conf") =>
+    // Keep the content for all reference-overrides.conf files
+    MergeStrategy.concat
+  case referenceOverrides if referenceOverrides.contains("migration-support\\default-create-table.sql")  => MergeStrategy.concat
+  case x =>
+    val oldStrategy = (assemblyMergeStrategy in assembly).value
+    oldStrategy(x)
+}
